@@ -8,8 +8,11 @@
 #define SCENE_INDEX_GAME 1
 #define SCENE_COUNT 2
 
+#define DRAW_LAYER_COUNT 10
+
 // paths
 #define RESOURCES_DIR ".\\resources"
+#define TEXTURES_DIR ".\\resources\\textures\\"
 #define SETTINGS_INI L##".\\resources\\Config.ini"
 
 // misc

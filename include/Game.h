@@ -24,7 +24,7 @@ private:
 
     void checkInput();
     void update(float deltaTime);
-    void draw();
+    void draw() const;
 
 private:
     // scene

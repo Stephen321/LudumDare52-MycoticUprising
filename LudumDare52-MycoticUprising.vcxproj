@@ -166,6 +166,9 @@ xcopy.exe "$(ProjectDir)resources"  "$(TargetDir)resources" /Y /D /S /I</Command
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\Character.cpp" />
+    <ClCompile Include="include\GameObject.cpp" />
+    <ClCompile Include="include\Player.cpp" />
     <ClCompile Include="src\Game.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -466,10 +469,13 @@ xcopy.exe "$(ProjectDir)resources"  "$(TargetDir)resources" /Y /D /S /I</Command
     <ClCompile Include="src\Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Character.h" />
     <ClInclude Include="include\Constants.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\GameObject.h" />
     <ClInclude Include="include\GameScene.h" />
     <ClInclude Include="include\MenuScene.h" />
+    <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\Config.h" />
     <ClInclude Include="include\Utilities.h" />

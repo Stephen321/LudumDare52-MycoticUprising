@@ -11,6 +11,7 @@ Config getConfig()
     return config;
 }
 
+
 Settings& getSettings()
 {
     return Game::get().getSettings();

@@ -11,6 +11,6 @@ public:
     void init();
     void checkInput();
     void update(float deltaTime);
-    void draw();
+    void draw() const;
     void close();
 };

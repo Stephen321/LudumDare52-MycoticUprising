@@ -19,17 +19,17 @@ void MenuScene::update(float deltaTime)
 {
 }
 
-void MenuScene::draw()
+void MenuScene::draw() const
 {
     ClearBackground(BEIGE);
     
-    DrawText("Mycotic Uprising", getScreenX(0.1f), getScreenY(0.15f), 34.f, GRAY);
+    DrawText("Mycotic Uprising", getScreenX(0.1f), getScreenY(0.15f), 32.f, GRAY);
 
     DrawText(
-        "Stop the spread of the sentient fungi. Harestable crops are walking rampant.\n - Use left click for flame attacks\n - Space to roll\n - Right click to harvest.",
-        getScreenX(0.14f), getScreenY(0.25f), 22.f, DARKGRAY);
+        "Stop the spread of the sentient fungi. Harestable\n crops are walking rampant.\n - Use left click for flame attacks\n - Space to roll\n - Right click to harvest.",
+        getScreenX(0.14f), getScreenY(0.25f), 20.f, DARKGRAY);
 
-    DrawText("Press Space to start", getScreenX(0.37f), getScreenY(0.7f), 28.f, DARKGRAY);
+    DrawText("Press Space to start", getScreenX(0.3f), getScreenY(0.7f), 26.f, DARKGRAY);
 }
 
 void MenuScene::close()

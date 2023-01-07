@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cmath>
+
 #include "Constants.h"
 #include "Settings.h"
 
@@ -13,3 +15,8 @@ extern Settings& getSettings();
 
 extern size_t getScreenX(float percentage);
 extern size_t getScreenY(float percentage);
+
+inline float getLength(float x, float y)
+{
+    return sqrt(x * x + y * y);
+}

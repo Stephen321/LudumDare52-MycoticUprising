@@ -41,7 +41,7 @@ void Game::init()
     // init m_scenes
     m_scenes[SCENE_INDEX_MENU] = new MenuScene;
     m_scenes[SCENE_INDEX_GAME] = new GameScene;
-    switchScene(SCENE_INDEX_MENU);
+    switchScene(SCENE_INDEX_GAME);
 }
 
 void Game::run()
