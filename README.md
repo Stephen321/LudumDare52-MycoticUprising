@@ -16,6 +16,6 @@ Links and more pictures:
 
 Itch.io: https://stephen321.itch.io/mycotic-uprising
 
-Ludum Dare: https://ldjam.com/events/ludum-dare/51/ludumdare51-every10seconds
+Ludum Dare: -
 
-Video: https://youtu.be/WiWGGNiGKo4
+Video: -
