@@ -1,28 +1,43 @@
 #include "GameObject.h"
-#include "Utilities.h"
+
+#include "TextureManager.h"
 
 
 GameObject::GameObject()
-    : m_drawLayer(0)
-      , m_alive(true)
-      , m_position{0, 0}
-      , m_rotation(0.f)
+    : m_position{}
+      , m_origin{}
       , m_scale(1.f)
+      , m_rotation(0.f)
       , m_tint(WHITE)
+      , m_horizontalFlip(false)
+      , m_drawLayer(0)
+      , m_alive(true)
 {
 }
 
 void GameObject::init(const std::string& textureName, size_t drawLayer)
 {
-    std::string path = std::string(TEXTURES_DIR);
-    path += textureName;
-    path += ".png";
-    m_texture = LoadTexture(path.c_str());
+    m_texture = TextureManager::get().loadTexture(textureName);
+
+    m_origin.x = m_texture.width * 0.5f;
+    m_origin.y = m_texture.height * 0.5f;
 }
 
 void GameObject::draw() const
 {
-    DrawTextureEx(m_texture, m_position, m_rotation, m_scale, m_tint);
+    Rectangle source;
+    source.x = 0.f;
+    source.y = 0.f;
+    source.width = (m_horizontalFlip ? -1.f : 1.f) * (float)m_texture.width;
+    source.height = (float)m_texture.height;
+
+    Rectangle destination;
+    destination.x = m_position.x;
+    destination.y = m_position.y;
+    destination.width = (float)m_texture.width;
+    destination.height = (float)m_texture.height;
+
+    DrawTexturePro(m_texture, source, destination, m_origin, m_rotation, m_tint);
 }
 
 void GameObject::close()
@@ -32,9 +47,21 @@ void GameObject::close()
 
 void GameObject::setPosition(float x, float y)
 {
-    if (x != INVALID)
-        m_position.x = x;
-    
-    if (y != INVALID)
-        m_position.y = y;
+    m_position.x = x;
+    m_position.y = y;
+}
+
+void GameObject::setOrigin(float x, float y)
+{
+    m_origin.x = x;
+    m_origin.y = y;
+}
+
+bool GameObject::isVisible() const
+{
+    const float Offset = 100.f;
+    return (m_position.x > -Offset ||
+        m_position.y > -Offset ||
+        m_position.x < (float)GetScreenWidth() + Offset ||
+        m_position.y < (float)GetScreenHeight() + Offset);
 }

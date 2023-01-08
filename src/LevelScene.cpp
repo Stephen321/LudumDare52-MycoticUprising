@@ -25,6 +25,7 @@ void LevelScene::init()
     // create background
     m_gameObjects.emplace_back(new StaticGameObject);
     m_gameObjects.back()->init("levels\\0", 0);
+    m_gameObjects.back()->setOrigin(0.f, 0.f);
 
     // create player
     m_gameObjects.emplace_back(new Player);
@@ -59,7 +60,9 @@ void LevelScene::update(float deltaTime)
     for (GameObject* gameObject : m_gameObjects)
     {
         if (gameObject)
+        {
             gameObject->update(deltaTime);
+        }
     }
     // update any singleton game objects
     ProjectileManager::get().update(deltaTime);
@@ -75,8 +78,12 @@ void LevelScene::draw() const
     {
         for (const GameObject* gameObject : m_gameObjects)
         {
-            if (gameObject && gameObject->getDrawLayer() == layer)
+            if (gameObject &&
+                gameObject->isVisible() &&
+                gameObject->getDrawLayer() == layer)
+            {
                 gameObject->draw();
+            }
         }
     }
 
@@ -93,7 +100,7 @@ void LevelScene::close()
         delete gameObject;
     }
     m_gameObjects.clear();
-    
+
     // close any singleton game objects
     ProjectileManager::get().close();
 }

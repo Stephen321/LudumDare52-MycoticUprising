@@ -5,7 +5,6 @@ DynamicGameObject::DynamicGameObject(const float maxVelocity)
     : m_acceleration{}
       , m_velocity{}
       , MaxVelocity(maxVelocity)
-      , m_direction(1)
       , m_hasDrag(false)
 {
 }
@@ -42,18 +41,12 @@ void DynamicGameObject::update(float deltaTime)
 
     // direction
     if (m_acceleration.x > 0.f)
-        m_direction = 1;
+        m_horizontalFlip = false;
     else if (m_acceleration.x < 0.f)
-        m_direction = -1;
+        m_horizontalFlip = true;
 
     m_position.x += m_velocity.x * deltaTime;
     m_position.y += m_velocity.y * deltaTime;
-}
-
-void DynamicGameObject::draw() const
-{
-    DrawTextureRec(m_texture, {0, 0, (float)m_direction * m_texture.width, (float)m_texture.height}, m_position,
-                   m_tint);
 }
 
 bool DynamicGameObject::isMoving() const

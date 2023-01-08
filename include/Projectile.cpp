@@ -2,6 +2,15 @@
 
 #include "Utilities.h"
 
+void Projectile::update(float deltaTime)
+{
+    DynamicGameObject::update(deltaTime);
+    if (!isVisible())
+    {
+        markAsDead();
+    }
+}
+
 Projectile::Projectile(const ProjectileProperties& properties)
     : DynamicGameObject(properties.maxVelocity)
       , m_properties(properties)

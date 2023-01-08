@@ -29,17 +29,17 @@ void AppleTree::update(float deltaTime)
     if (m_fireTimer > 0.5f)
     {
         m_fireTimer = 0.f;
-        ProjectileProperties properties;
-        properties.type = ProjectileProperties::Type::Point;
 
+        ProjectileProperties properties;
         // TODO: debug display radius that projectiles are chosen on
-        properties.startX = m_position.x + (m_direction * 20.f);
-        properties.startY = m_position.y;
+        properties.startX = m_position.x + ((xDir / length) * 20.f);
+        properties.startY = m_position.y + ((yDir / length) * 20.f);
         properties.targetX = levelState.playerPositionX;
         properties.targetY = levelState.playerPositionY;
         properties.textureName = "apple";
         properties.rotation = 0.f;
         properties.maxVelocity = 80.f;
+        properties.type = ProjectileProperties::Type::Point;
 
         fire(properties);
     }

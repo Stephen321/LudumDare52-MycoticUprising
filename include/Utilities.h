@@ -14,7 +14,6 @@
 extern Config getConfig();
 extern Settings& getSettings();
 
-
 extern float getScreenX(float percentage);
 extern float getScreenY(float percentage);
 

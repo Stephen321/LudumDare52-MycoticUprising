@@ -167,6 +167,7 @@ xcopy.exe "$(ProjectDir)resources"  "$(TargetDir)resources" /Y /D /S /I</Command
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="include\Projectile.cpp" />
+    <ClCompile Include="include\TextureManager.cpp" />
     <ClCompile Include="src\AppleTree.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1074,6 +1075,7 @@ xcopy.exe "$(ProjectDir)resources"  "$(TargetDir)resources" /Y /D /S /I</Command
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\Config.h" />
     <ClInclude Include="include\StaticGameObject.h" />
+    <ClInclude Include="include\TextureManager.h" />
     <ClInclude Include="include\Utilities.h" />
   </ItemGroup>
   <ItemGroup>

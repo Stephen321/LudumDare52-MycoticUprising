@@ -25,6 +25,7 @@ struct ProjectileProperties
 class Projectile : public DynamicGameObject
 {
 public:
+    void update(float deltaTime) override;
     Projectile(const ProjectileProperties& properties);
 
 protected:

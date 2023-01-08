@@ -22,14 +22,18 @@ public:
     bool getAlive() const { return m_alive; }
     void setPosition(float x, float y);
     Vector2 getPosition() const { return m_position; }
+    void setOrigin(float x, float y);
     void markAsDead() { m_alive = false; }
+    bool isVisible() const;
 
 protected:
     Vector2 m_position;
+    Vector2 m_origin;
     float m_scale;
     float m_rotation;
     Texture2D m_texture;
     Color m_tint;
+    bool m_horizontalFlip;
 
 private:
     size_t m_drawLayer;
