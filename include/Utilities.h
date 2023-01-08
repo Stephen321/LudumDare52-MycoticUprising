@@ -17,6 +17,11 @@ extern Settings& getSettings();
 extern float getScreenX(float percentage);
 extern float getScreenY(float percentage);
 
+inline float toRadians(float degrees)
+{
+    return degrees*3.14/180;
+}
+
 inline float getLength(float x, float y)
 {
     return sqrt(x * x + y * y);

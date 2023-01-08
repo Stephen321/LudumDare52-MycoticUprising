@@ -1,5 +1,7 @@
 #include "Player.h"
 
+#include "ProjectileManager.h"
+
 Player::Player()
     : DynamicGameObject(100.f)
 {
@@ -58,6 +60,28 @@ void Player::checkInput()
     {
         m_acceleration.x = 0.f;
     }
+
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+    {
+        float rotationOffset = m_horizontalFlip ? 180.f : 0.f;
+        
+        ProjectileProperties properties;
+        properties.startX = m_position.x + ((m_horizontalFlip ? -1.f : 1.f) * 24.f);
+        properties.startY = m_position.y;
+        properties.textureName = "fireWall";
+        if (m_horizontalFlip)
+            properties.textureName += "Flipped";
+        properties.rotation = rotationOffset;
+        properties.maxVelocity = 120.f;
+        properties.type = ProjectileProperties::Type::FireWave;
+        ProjectileManager::get().addProjectile(properties);
+
+        properties.rotation = 30 + rotationOffset;
+        ProjectileManager::get().addProjectile(properties);
+
+        properties.rotation = -30 + rotationOffset;
+        ProjectileManager::get().addProjectile(properties);
+    }
 }
 
 void Player::update(float deltaTime)
@@ -77,7 +101,7 @@ void Player::update(float deltaTime)
     {
         m_position.x = -halfWidth;
     }
-    
+
     if (m_position.y < -halfHeight)
     {
         m_position.y = (float)GetScreenHeight() + halfHeight;

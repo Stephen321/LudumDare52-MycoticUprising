@@ -18,7 +18,8 @@ struct ProjectileProperties
 
     enum class Type
     {
-        Point
+        Point,
+        FireWave
     } type = Type::Point;
 };
 
@@ -32,10 +33,20 @@ protected:
     ProjectileProperties m_properties;
 };
 
-class PointProjectile : public Projectile
+class PointProjectile final : public Projectile
 {
 public:
     explicit PointProjectile(const ProjectileProperties& properties);
+};
+
+class FireWaveProjectile final : public  Projectile
+{
+public:
+    explicit FireWaveProjectile(const ProjectileProperties& properties);
+    void update(float deltaTime) override;
+
+private:
+    float m_timer;
 };
 
 extern Projectile* createProjectile(const ProjectileProperties& properties);
