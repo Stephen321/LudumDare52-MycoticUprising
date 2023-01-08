@@ -2,6 +2,7 @@
 
 #include "Game.h"
 #include "Player.h"
+#include "SoundUtilities.h"
 #include "Utilities.h"
 
 class Player;
@@ -9,6 +10,7 @@ class Player;
 void ApplePickup::init(const std::string& textureName, size_t drawLayer)
 {
     StaticGameObject::init("applePickup", 1);
+    m_sound = loadSound("pickup");
 }
 
 void ApplePickup::update(float deltaTime)
@@ -22,7 +24,15 @@ void ApplePickup::update(float deltaTime)
                         player->getPosition().y, player->getWidth()))
         {
             player->receivedPickup();
+            PlaySound(m_sound);
             markAsDead();
         }
     }
+}
+
+void ApplePickup::close()
+{
+    StaticGameObject::close();
+
+    UnloadSound(m_sound);
 }

@@ -16,6 +16,7 @@
 // paths
 #define RESOURCES_DIR ".\\resources"
 #define TEXTURES_DIR ".\\resources\\textures\\"
+#define SOUND_DIR ".\\resources\\sound\\"
 #define SETTINGS_INI L##".\\resources\\Config.ini"
 
 // misc

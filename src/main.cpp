@@ -1,9 +1,9 @@
 #include <ctime>
-
 #include "Game.h"
-#include "raylib.h"
-#include "Utilities.h"
 
+// TODO:
+//  - all sound needs to be implemented properly
+//  - see other todos
 
 
 int main()

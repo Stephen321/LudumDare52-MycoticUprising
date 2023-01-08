@@ -6,6 +6,7 @@
 #include "LevelDifficultyManager.h"
 #include "Player.h"
 #include "ProjectileManager.h"
+#include "SoundUtilities.h"
 #include "StaticGameObject.h"
 #include "Utilities.h"
 
@@ -42,6 +43,15 @@ void LevelScene::init()
 
     // setup any singleton game objects
     ProjectileManager::get().init();
+
+    m_levelChangeSound = loadSound("levelChange");
+    SetSoundVolume(m_levelChangeSound, 0.45f);
+
+
+    m_music = LoadMusicStream(".\\resources\\music\\game.wav");
+    m_music.looping = true;
+    PlayMusicStream(m_music);
+    SetMusicVolume(m_music, 0.6f);
 }
 
 void LevelScene::checkInput()
@@ -51,6 +61,8 @@ void LevelScene::checkInput()
 
 void LevelScene::update(float deltaTime)
 {
+    UpdateMusicStream(m_music);
+    
     // check game over
     if (m_player->getHealth() == 0)
         Game::get().gameOver({m_level, m_player->getHarvestedCount()});
@@ -120,6 +132,10 @@ void LevelScene::draw() const
 
 void LevelScene::close()
 {
+    // TODO: crashes
+    //     UnloadSound(m_levelChangeSound);
+    // UnloadMusicStream(m_music);
+    
     for (GameObject*& gameObject : m_gameObjects)
     {
         if (gameObject)
@@ -204,6 +220,8 @@ void LevelScene::placeEnemies()
 
 void LevelScene::resetLevel(size_t newLevel)
 {
+    if (newLevel != 0)
+        PlaySound(m_levelChangeSound);
     LevelDifficultyManager::get().setLevel(m_level);
     resetPlayer();
     placeEnemies();

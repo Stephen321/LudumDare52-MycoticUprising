@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "Game.h"
 #include "ProjectileManager.h"
+#include "SoundUtilities.h"
 #include "TextureManager.h"
 #include "Utilities.h"
 
@@ -28,6 +29,12 @@ void Player::init(const std::string& textureName, size_t drawLayer)
     // TODO: hack. should be anim system
     m_dashTexture = TextureManager::get().loadTexture("playerDash");
     m_harvestTexture = TextureManager::get().loadTexture("playerSickle");
+
+    m_dashSound = loadSound("dash");
+    SetSoundVolume(m_dashSound, 0.3f);
+    m_harvestSound = loadSound("harvest");
+    m_fireSound = loadSound("fire");
+    SetSoundVolume(m_dashSound, 0.3f);
 }
 
 void Player::checkInput()
@@ -116,6 +123,8 @@ void Player::checkInput()
         if (rotation > 180.f && rotation < 270.f)
             properties.textureName += "Flipped";
 
+        PlaySound(m_fireSound);
+
         properties.rotation = rotation;
         ProjectileManager::get().addProjectile(properties);
 
@@ -132,6 +141,7 @@ void Player::checkInput()
         {
             m_dashing = true;
             m_velocityBeforeDash = m_velocity;
+            PlaySound(m_dashSound);
         }
     }
 
@@ -141,6 +151,7 @@ void Player::checkInput()
         {
             m_harvesting = true;
             harvestEnemies();
+            PlaySound(m_harvestSound);
         }
     }
 }
@@ -214,6 +225,14 @@ void Player::damage(float amount)
     {
         m_health = 0.f;
     }
+}
+
+void Player::close()
+{
+    DynamicGameObject::close();
+    UnloadSound(m_dashSound);
+    UnloadSound(m_harvestSound);
+    UnloadSound(m_fireSound);
 }
 
 void Player::receivedPickup()

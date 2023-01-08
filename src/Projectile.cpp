@@ -4,6 +4,7 @@
 
 #include "Game.h"
 #include "Player.h"
+#include "SoundUtilities.h"
 #include "Utilities.h"
 
 // TODO: remove this collision code and do better
@@ -74,8 +75,22 @@ void PointProjectile::update(float deltaTime)
         {
             player->damage(2.f);
             markAsDead();
+            PlaySound(m_sound);
         }
     }
+}
+
+void PointProjectile::init(const std::string& textureName, size_t drawLayer)
+{
+    Projectile::init(textureName, drawLayer);
+    m_sound = loadSound("hit");
+    SetSoundVolume(m_sound, 1.5f);
+}
+
+void PointProjectile::close()
+{
+    Projectile::close();
+    UnloadSound(m_sound);
 }
 
 FireWaveProjectile::FireWaveProjectile(const ProjectileProperties& properties)

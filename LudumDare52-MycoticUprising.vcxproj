@@ -150,7 +150,7 @@ xcopy.exe "$(ProjectDir)resources"  "$(TargetDir)resources" /Y /D /S /I</Command
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(ProjectDir)/external/raylib/include; $(ProjectDir)include</AdditionalIncludeDirectories>
@@ -167,6 +167,7 @@ xcopy.exe "$(ProjectDir)resources"  "$(TargetDir)resources" /Y /D /S /I</Command
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="include\LevelDifficultyManager.cpp" />
+    <ClCompile Include="include\SoundUtilities.cpp" />
     <ClCompile Include="src\ApplePickup.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1372,6 +1373,7 @@ xcopy.exe "$(ProjectDir)resources"  "$(TargetDir)resources" /Y /D /S /I</Command
     <ClInclude Include="include\ProjectileManager.h" />
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\Config.h" />
+    <ClInclude Include="include\SoundUtilities.h" />
     <ClInclude Include="include\StaticGameObject.h" />
     <ClInclude Include="include\TextureManager.h" />
     <ClInclude Include="include\Utilities.h" />

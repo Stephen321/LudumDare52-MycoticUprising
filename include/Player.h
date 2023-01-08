@@ -11,6 +11,7 @@ public:
 
     // TODO: redo collision code
     void damage(float amount);
+    void close() override;
 
     int getHealth() const { return m_health; }
     size_t getHarvestedCount() const { return m_harvestedCount; }
@@ -28,10 +29,14 @@ private:
     float m_dashTimer;
     bool m_dashing;
     float m_dashCooldown;
+    Sound m_dashSound;
 
     bool m_harvesting;
     float m_harvestTimer;
     float m_harvestCooldown;
+    Sound m_harvestSound;
+
+    Sound m_fireSound;
 
 public:
     void draw() const override;

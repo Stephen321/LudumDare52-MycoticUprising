@@ -38,6 +38,11 @@ class PointProjectile final : public Projectile
 public:
     explicit PointProjectile(const ProjectileProperties& properties);
     void update(float deltaTime) override;
+    void init(const std::string& textureName, size_t drawLayer) override;
+    void close() override;
+
+private:
+    Sound m_sound;
 };
 
 class FireWaveProjectile final : public  Projectile

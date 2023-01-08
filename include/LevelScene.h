@@ -41,4 +41,6 @@ private:
     LevelState m_state;
 
     size_t m_targetHarvestedCount;
+    Sound m_levelChangeSound;
+    Music m_music;
 };
