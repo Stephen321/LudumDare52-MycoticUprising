@@ -1,6 +1,7 @@
 #pragma once
 
-#include <cmath>
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 #include "Constants.h"
 #include "Settings.h"
@@ -19,7 +20,12 @@ extern float getScreenY(float percentage);
 
 inline float toRadians(float degrees)
 {
-    return degrees*3.14/180;
+    return degrees * (M_PI / 180.0);
+}
+
+inline float toDegrees(float radians)
+{
+    return radians * (180.0 / M_PI);
 }
 
 inline float getLength(float x, float y)
@@ -33,3 +39,5 @@ inline void normalize(float x, float y, float& outX, float& outY)
     outX = x / length;
     outY = y / length;
 }
+
+extern bool isColliding(float x1, float y1, float r1, float x2, float y2, float r2);

@@ -34,7 +34,7 @@ void DynamicGameObject::update(float deltaTime)
     else
     {
         Vector2 normalizedVelocity{};
-        normalize(m_velocity.x, m_velocity.y, normalizedVelocity.x, normalizedVelocity.y);
+        normalize(newVelocity.x, newVelocity.y, normalizedVelocity.x, normalizedVelocity.y);
         m_velocity.x = normalizedVelocity.x * MaxVelocity;
         m_velocity.y = normalizedVelocity.y * MaxVelocity;
     }

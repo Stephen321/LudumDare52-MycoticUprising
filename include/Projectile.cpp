@@ -1,6 +1,35 @@
 #include "Projectile.h"
 
+#include <vector>
+
+#include "Game.h"
+#include "Player.h"
 #include "Utilities.h"
+
+// TODO: remove this collision code and do better
+
+namespace
+{
+    void destroyCollidingParticles(float x, float y, float r)
+    {
+        std::vector<GameObject*> collidingProjectiles;
+
+        for (GameObject* gameObject : Game::get().getGameObjectsRef())
+        {
+            PointProjectile* projectile = dynamic_cast<PointProjectile*>(gameObject);
+            if (projectile)
+            {
+                if (isColliding(x, y, r,
+                                projectile->getPosition().x,
+                                projectile->getPosition().y,
+                                projectile->getWidth()))
+                {
+                    projectile->markAsDead();
+                }
+            }
+        }
+    }
+}
 
 void Projectile::update(float deltaTime)
 {
@@ -30,26 +59,47 @@ PointProjectile::PointProjectile(const ProjectileProperties& properties)
     m_velocity.y = MaxVelocity * (yDir / length);
 }
 
+void PointProjectile::update(float deltaTime)
+{
+    if (!isAlive())
+        return;
+
+    Projectile::update(deltaTime);
+
+    // TODO: this collision code shouldnt be here
+    Player* player = Game::get().getPlayer();
+    if (player)
+    {
+        if (isColliding(m_position.x, m_position.y - (getHeight() * 0.5f), getWidth(), player->getPosition().x, player->getPosition().y, player->getWidth()))
+        {
+            player->damage(2.f);
+            markAsDead();
+        }
+    }
+}
+
 FireWaveProjectile::FireWaveProjectile(const ProjectileProperties& properties)
     : Projectile(properties)
       , m_timer(0.f)
 {
     m_velocity.x = cosf(toRadians(m_rotation)) * MaxVelocity;
     m_velocity.y = sinf(toRadians(m_rotation)) * MaxVelocity;
-    m_horizontalFlip = m_velocity.x < 0.f;
 }
 
 void FireWaveProjectile::update(float deltaTime)
 {
     Projectile::update(deltaTime);
     m_timer += deltaTime;
-    if (m_timer > 0.8f)
+    if (m_timer > 0.35f)
     {
         markAsDead();
-        m_tint.a = 0;
+        return;
     }
-    else if (m_timer > 0.65f)
-        m_tint.a = 255 - (255 * ((m_timer - 0.6f) / 0.2f));
+
+    if (m_timer > 0.25f)
+        m_tint.a = 255 - (255 * ((m_timer - 0.25f) / 0.1f));
+
+    destroyCollidingParticles(m_position.x, m_position.y, getWidth());
 }
 
 Projectile* createProjectile(const ProjectileProperties& properties)

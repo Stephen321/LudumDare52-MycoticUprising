@@ -21,6 +21,7 @@ public:
 
     LevelState getState();
     std::list<GameObject*>& getGameObjectsRef();
+    Player* getPlayer();
 
 private:
     void resetPlayer();

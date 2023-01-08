@@ -1,5 +1,7 @@
 #pragma once
 
+#define GAME_DEBUG 1
+
 // window
 #define WINDOW_TITLE "Mycotic Uprising"
 

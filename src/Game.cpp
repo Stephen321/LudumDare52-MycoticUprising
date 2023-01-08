@@ -107,5 +107,17 @@ std::list<GameObject*>& Game::getGameObjectsRef()
     {
         return gameObjects;
     }
-   return level->getGameObjectsRef();
+    return level->getGameObjectsRef();
+}
+
+Player* Game::getPlayer()
+{
+    Player* player = nullptr;
+
+    LevelScene* level = dynamic_cast<LevelScene*>(m_scenes[m_currentSceneIndex]);
+    if (!level)
+    {
+        return player;
+    }
+    return level->getPlayer();
 }

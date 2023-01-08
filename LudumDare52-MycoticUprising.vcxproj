@@ -166,6 +166,7 @@ xcopy.exe "$(ProjectDir)resources"  "$(TargetDir)resources" /Y /D /S /I</Command
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\ApplePickup.cpp" />
     <ClCompile Include="include\Projectile.cpp" />
     <ClCompile Include="include\TextureManager.cpp" />
     <ClCompile Include="src\AppleTree.cpp">
@@ -1060,6 +1061,7 @@ xcopy.exe "$(ProjectDir)resources"  "$(TargetDir)resources" /Y /D /S /I</Command
     <ClCompile Include="src\Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\ApplePickup.h" />
     <ClInclude Include="include\AppleTree.h" />
     <ClInclude Include="include\DynamicGameObject.h" />
     <ClInclude Include="include\Constants.h" />

@@ -5,8 +5,25 @@
 
 Enemy::Enemy(const float maxVelocity)
     : DynamicGameObject(maxVelocity)
-      , m_infected(true)
+      , m_harvested(false)
+    , m_health(100.f)
 {
+}
+
+bool Enemy::harvest(float amount)
+{
+    if (m_harvested)
+        return false;
+    
+    m_health -= amount;
+    if (m_health < 0.f)
+    {
+        m_health = 0.f;
+        m_harvested = true;
+        harvested();
+        return true;
+    }
+    return false;
 }
 
 LevelState Enemy::getLevelState() const

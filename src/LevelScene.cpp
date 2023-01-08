@@ -51,9 +51,17 @@ void LevelScene::checkInput()
 void LevelScene::update(float deltaTime)
 {
     // remove any dead objects
-    m_gameObjects.erase(std::remove_if(m_gameObjects.begin(), m_gameObjects.end(), [](const GameObject* go)
+    m_gameObjects.erase(std::remove_if(m_gameObjects.begin(), m_gameObjects.end(), [](GameObject* go)
     {
-        return !go || !go->getAlive();
+        if (!go)
+            return true;
+        if (!go->isAlive())
+        {
+            go->close();
+            delete go;
+            return true;
+        }
+        return false;
     }), m_gameObjects.end());
 
     // update
@@ -89,6 +97,14 @@ void LevelScene::draw() const
 
     // draw any singleton game objects
     ProjectileManager::get().draw();
+
+
+    // TODO: HUD class
+    DrawText(TextFormat("Health: %d", m_player->getHealth()), getScreenX(0.1f), getScreenY(0.06f), 16.f, WHITE);
+    DrawText(TextFormat("Harvested: %d", m_player->getHarvestedCount()), getScreenX(0.75f), getScreenY(0.06f), 16.f,
+             WHITE);
+    DrawText(TextFormat("Level: %d", m_level + 1), getScreenX(0.43f), getScreenY(0.03f), 18.f,
+             WHITE);
 }
 
 void LevelScene::close()
@@ -113,6 +129,11 @@ LevelState LevelScene::getState()
 std::list<GameObject*>& LevelScene::getGameObjectsRef()
 {
     return m_gameObjects;
+}
+
+Player* LevelScene::getPlayer()
+{
+    return m_player;
 }
 
 void LevelScene::resetPlayer()

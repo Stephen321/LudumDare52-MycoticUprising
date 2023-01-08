@@ -10,6 +10,7 @@ public:
     static TextureManager& get();
 
     Texture2D loadTexture(const std::string& textureName);
+    void closeTexture(const Texture& texture);
 
 private:
     TextureManager() = default;
@@ -17,5 +18,5 @@ private:
     TextureManager(const TextureManager&) = delete;
     TextureManager& operator=(const TextureManager&) = delete;
 
-   std::map<std::string, Texture2D> m_textures;
+   std::map<std::string, std::pair<Texture2D, size_t>> m_textures;
 };

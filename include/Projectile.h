@@ -37,6 +37,7 @@ class PointProjectile final : public Projectile
 {
 public:
     explicit PointProjectile(const ProjectileProperties& properties);
+    void update(float deltaTime) override;
 };
 
 class FireWaveProjectile final : public  Projectile

@@ -5,6 +5,7 @@
 #include "Settings.h"
 
 
+class Player;
 class GameObject;
 class Scene;
 
@@ -21,6 +22,7 @@ public:
     void switchScene(size_t sceneIndex);
     LevelState getLevelState();
     std::list<GameObject*>& getGameObjectsRef();
+    Player* getPlayer();
 
 private:
     Game();

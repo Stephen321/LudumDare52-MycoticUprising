@@ -2,6 +2,8 @@
 
 #include "TextureManager.h"
 
+#include "Constants.h"
+
 
 GameObject::GameObject()
     : m_position{}
@@ -38,11 +40,16 @@ void GameObject::draw() const
     destination.height = (float)m_texture.height;
 
     DrawTexturePro(m_texture, source, destination, m_origin, m_rotation, m_tint);
+
+#ifdef GAME_DEBUG
+    if (getWidth() < 400.f)
+        DrawCircleLines(m_position.x, m_position.y, getWidth(), RED);
+#endif
 }
 
 void GameObject::close()
 {
-    UnloadTexture(m_texture);
+    TextureManager::get().closeTexture(m_texture);
 }
 
 void GameObject::setPosition(float x, float y)

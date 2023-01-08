@@ -19,12 +19,14 @@ public:
     virtual void close();
 
     size_t getDrawLayer() const { return m_drawLayer; }
-    bool getAlive() const { return m_alive; }
+    bool isAlive() const { return m_alive; }
     void setPosition(float x, float y);
     Vector2 getPosition() const { return m_position; }
     void setOrigin(float x, float y);
-    void markAsDead() { m_alive = false; }
+    void markAsDead() { m_alive = false; m_tint.a = 0; }
     bool isVisible() const;
+    float getWidth() const { return (float)m_texture.width; }
+    float getHeight() const { return (float)m_texture.height; }
 
 protected:
     Vector2 m_position;
