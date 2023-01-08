@@ -1,6 +1,6 @@
 Created for Ludum Dare 52 Compo.
 
-Description:
+## Description:
 
 ​Stop the spread of the sentient fungi. Harvestable trees are walking rampant.
 
@@ -10,11 +10,11 @@ Description:
 
 - Right click to harvest (when in close).
 
-Created by:
+## Created by:
 
 Stephen Ennis
 
-Tools/Libraries:
+## Tools/Libraries:
 
 - Rider (IDE)
 
@@ -26,7 +26,7 @@ Tools/Libraries:
 
 - Paint.net
 
-Links and more pictures:
+## Links and more pictures:
 
 
 ​​https://github.com/Stephen321/LudumDare52-MycoticUprising
