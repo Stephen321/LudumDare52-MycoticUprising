@@ -6,7 +6,7 @@ Description:
 
 - Use left click for flame attacks (destroys projectiles)
 
- - Space to dash
+- Space to dash
 
 - Right click to harvest (when in close).
 
