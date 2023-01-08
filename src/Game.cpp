@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "Utilities.h"
 #include "GameObject.h"
+#include "GameOverScene.h"
 
 Game::Game()
     : m_currentSceneIndex(0)
@@ -42,7 +43,8 @@ void Game::init()
     // init m_scenes
     m_scenes[SCENE_INDEX_MENU] = new MenuScene;
     m_scenes[SCENE_INDEX_LEVEL] = new LevelScene;
-    switchScene(SCENE_INDEX_LEVEL);
+    m_scenes[SCENE_INDEX_GAMEOVER] = new GameOverScene;
+    switchScene(SCENE_INDEX_MENU);
 }
 
 void Game::run()
@@ -120,4 +122,10 @@ Player* Game::getPlayer()
         return player;
     }
     return level->getPlayer();
+}
+
+void Game::gameOver(const PlayerStats& playerStats)
+{
+    m_playerStats = playerStats;
+    switchScene(SCENE_INDEX_GAMEOVER);
 }

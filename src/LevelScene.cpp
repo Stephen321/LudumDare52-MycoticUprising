@@ -1,6 +1,7 @@
 #include "LevelScene.h"
 
 #include "AppleTree.h"
+#include "Game.h"
 #include "GameObject.h"
 #include "Player.h"
 #include "ProjectileManager.h"
@@ -50,6 +51,14 @@ void LevelScene::checkInput()
 
 void LevelScene::update(float deltaTime)
 {
+    // check game over
+    bool gameOver = (m_player->getHealth() == 0);
+
+    // TODO: check for winning a level
+
+    if (gameOver)
+        Game::get().gameOver({m_level, m_player->getHarvestedCount()});
+    
     // remove any dead objects
     m_gameObjects.erase(std::remove_if(m_gameObjects.begin(), m_gameObjects.end(), [](GameObject* go)
     {

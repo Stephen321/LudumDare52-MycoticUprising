@@ -15,7 +15,7 @@ Player::Player()
       , m_harvestTimer(0.f)
       , m_harvesting(false)
       , m_harvestCooldown(0.f)
-, m_harvestedCount(0)
+      , m_harvestedCount(0)
 {
     m_health = MaxHealth;
 }

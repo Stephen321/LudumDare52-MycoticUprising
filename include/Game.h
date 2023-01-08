@@ -9,6 +9,13 @@ class Player;
 class GameObject;
 class Scene;
 
+struct PlayerStats
+{
+    size_t level;
+    size_t harvestedCount;
+};
+
+
 class Game
 {
 public:
@@ -23,6 +30,8 @@ public:
     LevelState getLevelState();
     std::list<GameObject*>& getGameObjectsRef();
     Player* getPlayer();
+    void gameOver(const PlayerStats& playerStats);
+    PlayerStats getPlayerStats() { return m_playerStats; }
 
 private:
     Game();
@@ -40,4 +49,6 @@ private:
     size_t m_currentSceneIndex;
 
     Settings m_settings;
+
+    PlayerStats m_playerStats;
 };
