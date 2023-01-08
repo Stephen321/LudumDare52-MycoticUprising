@@ -30,6 +30,6 @@ Stephen Ennis
 ![cover_image](https://user-images.githubusercontent.com/14903680/211218332-ebd40908-b6c6-44a6-addf-52735c75cf0c.png)
 
 
-​​https://github.com/Stephen321/LudumDare52-MycoticUprising
-
-https://youtu.be/Cy0HNUTWPpc
+itch.io: https://stephen321.itch.io/mycotic-uprising
+Ludum Dare: https://ldjam.com/events/ludum-dare/52/mycotic-uprising
+YouTube: https://youtu.be/Cy0HNUTWPpc
