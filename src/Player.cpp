@@ -151,8 +151,8 @@ void Player::update(float deltaTime)
     {
         Vector2 normalizedVelocity{};
         normalize(m_velocity.x, m_velocity.y, normalizedVelocity.x, normalizedVelocity.y);
-        m_velocity.x = normalizedVelocity.x * MaxVelocity * 2.5f;
-        m_velocity.y = normalizedVelocity.y * MaxVelocity * 2.5f;
+        m_velocity.x = normalizedVelocity.x * m_maxVelocity * 2.5f;
+        m_velocity.y = normalizedVelocity.y * m_maxVelocity * 2.5f;
         m_position.x += m_velocity.x * deltaTime;
         m_position.y += m_velocity.y * deltaTime;
 

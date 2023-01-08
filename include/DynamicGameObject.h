@@ -13,7 +13,7 @@ protected:
     bool isAccelerating() const;
     Vector2 m_acceleration;
     Vector2 m_velocity;
-    const float MaxVelocity;
+    float m_maxVelocity;
     bool m_hasDrag;
 
 private:

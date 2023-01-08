@@ -1,6 +1,7 @@
 #include "Enemy.h"
 
 #include "Game.h"
+#include "LevelDifficultyManager.h"
 #include "ProjectileManager.h"
 
 Enemy::Enemy(const float maxVelocity)
@@ -8,6 +9,7 @@ Enemy::Enemy(const float maxVelocity)
       , m_harvested(false)
     , m_health(100.f)
 {
+    m_maxVelocity *= LevelDifficultyManager::get().getSpeedScale();
 }
 
 bool Enemy::harvest(float amount)

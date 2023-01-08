@@ -4,7 +4,7 @@
 DynamicGameObject::DynamicGameObject(const float maxVelocity)
     : m_acceleration{}
       , m_velocity{}
-      , MaxVelocity(maxVelocity)
+      , m_maxVelocity(maxVelocity)
       , m_hasDrag(false)
 {
 }
@@ -25,7 +25,7 @@ void DynamicGameObject::update(float deltaTime)
 
     // set velocity if below max
     const float newVelocityLength = getLength(newVelocity.x, newVelocity.y);
-    if (newVelocityLength < MaxVelocity)
+    if (newVelocityLength < m_maxVelocity)
     {
         m_velocity = newVelocity;
         if (newVelocityLength < 0.01f)
@@ -35,8 +35,8 @@ void DynamicGameObject::update(float deltaTime)
     {
         Vector2 normalizedVelocity{};
         normalize(newVelocity.x, newVelocity.y, normalizedVelocity.x, normalizedVelocity.y);
-        m_velocity.x = normalizedVelocity.x * MaxVelocity;
-        m_velocity.y = normalizedVelocity.y * MaxVelocity;
+        m_velocity.x = normalizedVelocity.x * m_maxVelocity;
+        m_velocity.y = normalizedVelocity.y * m_maxVelocity;
     }
 
     // direction

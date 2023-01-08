@@ -55,8 +55,8 @@ PointProjectile::PointProjectile(const ProjectileProperties& properties)
     float xDir = m_properties.targetX - m_position.x;
     float yDir = m_properties.targetY - m_position.y;
     float length = getLength(xDir, yDir);
-    m_velocity.x = MaxVelocity * (xDir / length);
-    m_velocity.y = MaxVelocity * (yDir / length);
+    m_velocity.x = m_maxVelocity * (xDir / length);
+    m_velocity.y = m_maxVelocity * (yDir / length);
 }
 
 void PointProjectile::update(float deltaTime)
@@ -82,8 +82,8 @@ FireWaveProjectile::FireWaveProjectile(const ProjectileProperties& properties)
     : Projectile(properties)
       , m_timer(0.f)
 {
-    m_velocity.x = cosf(toRadians(m_rotation)) * MaxVelocity;
-    m_velocity.y = sinf(toRadians(m_rotation)) * MaxVelocity;
+    m_velocity.x = cosf(toRadians(m_rotation)) * m_maxVelocity;
+    m_velocity.y = sinf(toRadians(m_rotation)) * m_maxVelocity;
 }
 
 void FireWaveProjectile::update(float deltaTime)

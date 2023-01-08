@@ -3,6 +3,7 @@
 #include "AppleTree.h"
 #include "Game.h"
 #include "GameObject.h"
+#include "LevelDifficultyManager.h"
 #include "Player.h"
 #include "ProjectileManager.h"
 #include "StaticGameObject.h"
@@ -10,7 +11,9 @@
 
 
 LevelScene::LevelScene()
-= default;
+    : m_targetHarvestedCount(0)
+{
+}
 
 LevelScene::~LevelScene()
 {
@@ -19,7 +22,8 @@ LevelScene::~LevelScene()
 
 void LevelScene::init()
 {
-    m_level = getSettings().level;
+    // TODO: get rid of this from settings
+    // m_level = getSettings().level;
 
     // TODO: should all be loaded from level config
 
@@ -32,13 +36,9 @@ void LevelScene::init()
     m_gameObjects.emplace_back(new Player);
     m_player = dynamic_cast<Player*>(m_gameObjects.back());
     m_player->init();
-    resetPlayer();
 
-    // add enemies
-    // TODO: texturemanager to share textures
-    m_gameObjects.emplace_back(new AppleTree);
-    m_gameObjects.back()->init("appleTreeEnemy");
-    m_gameObjects.back()->setPosition(getScreenX(0.2f), getScreenY(0.2f));
+    m_level = 0;
+    resetLevel(m_level);
 
     // setup any singleton game objects
     ProjectileManager::get().init();
@@ -52,13 +52,15 @@ void LevelScene::checkInput()
 void LevelScene::update(float deltaTime)
 {
     // check game over
-    bool gameOver = (m_player->getHealth() == 0);
+    if (m_player->getHealth() == 0)
+        Game::get().gameOver({m_level, m_player->getHarvestedCount()});
+
+    if (m_player->getHarvestedCount() == m_targetHarvestedCount)
+        resetLevel(m_level++);
 
     // TODO: check for winning a level
 
-    if (gameOver)
-        Game::get().gameOver({m_level, m_player->getHarvestedCount()});
-    
+
     // remove any dead objects
     m_gameObjects.erase(std::remove_if(m_gameObjects.begin(), m_gameObjects.end(), [](GameObject* go)
     {
@@ -157,4 +159,52 @@ void LevelScene::updateState()
 {
     m_state.playerPositionX = m_player->getPosition().x;
     m_state.playerPositionY = m_player->getPosition().y;
+}
+
+void LevelScene::placeEnemies()
+{
+    size_t enemyCount = LevelDifficultyManager::get().getEnemyCount();
+
+    m_targetHarvestedCount = m_player->getHarvestedCount() + enemyCount;
+
+    // TODO: should be smarter than randomly around the outside
+    for (size_t i = 0; i < enemyCount; i++)
+    {
+        m_gameObjects.emplace_back(new AppleTree);
+        m_gameObjects.back()->init("appleTreeEnemy");
+        float randomX;
+        float randomY;
+
+
+        int side = rand() % 4;
+        if (side == 0)
+        {
+            randomX = (float)GetScreenWidth() * ((float)rand() / (float)RAND_MAX);
+            randomY = -25.f;
+        }
+        else if (side == 1)
+        {
+            randomX = (float)GetScreenWidth() * ((float)rand() / (float)RAND_MAX);
+            randomY = GetScreenHeight() + 25.f;
+        }
+        if (side == 2)
+        {
+            randomX = -25.f;
+            randomY = (float)GetScreenHeight() * ((float)rand() / (float)RAND_MAX);
+        }
+        else if (side == 3)
+        {
+            randomX = GetScreenWidth() + 25.f;
+            randomY = (float)GetScreenHeight() * ((float)rand() / (float)RAND_MAX);
+        }
+
+        m_gameObjects.back()->setPosition(randomX, randomY);
+    }
+}
+
+void LevelScene::resetLevel(size_t newLevel)
+{
+    LevelDifficultyManager::get().setLevel(m_level);
+    resetPlayer();
+    placeEnemies();
 }

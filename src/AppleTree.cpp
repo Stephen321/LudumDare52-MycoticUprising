@@ -2,6 +2,7 @@
 
 #include "ApplePickup.h"
 #include "Game.h"
+#include "LevelDifficultyManager.h"
 #include "StaticGameObject.h"
 #include "TextureManager.h"
 #include "Utilities.h"
@@ -29,21 +30,22 @@ void AppleTree::update(float deltaTime)
         xDir /= length;
         yDir /= length;
     }
-    if (length < 25.f)
+    if (length < 55.f)
     {
         m_velocity = {};
     }
     else
     {
-        m_velocity.x = MaxVelocity * xDir;
-        m_velocity.y = MaxVelocity * yDir;
+        m_velocity.x = m_maxVelocity * xDir;
+        m_velocity.y = m_maxVelocity * yDir;
     }
     // move
     Enemy::update(deltaTime);
 
 
     m_fireTimer += deltaTime;
-    if (m_fireTimer > 0.45f)
+    // TODO: the level difficulty...
+    if (m_fireTimer > (0.45f / LevelDifficultyManager::get().getFireRateScale()) && length > 30.f)
     {
         m_fireTimer = 0.f;
 
@@ -68,9 +70,9 @@ void AppleTree::harvested()
     TextureManager::get().closeTexture(m_texture);
     m_texture = TextureManager::get().loadTexture("appleTreeHarvested");
 
-    if (rand() % 10 == 0)
+    if (rand() % 5 != 0)
         return;
-    
+
     Game::get().getGameObjectsRef().push_back(new ApplePickup);
     Game::get().getGameObjectsRef().back()->init();
 

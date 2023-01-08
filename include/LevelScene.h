@@ -26,12 +26,19 @@ public:
 private:
     void resetPlayer();
     void updateState();
+    void placeEnemies();
+    void resetLevel(size_t newLevel);
 
     size_t m_level = 0;
+
+    // TODO: should be not be this simple
+
 
     // TODO: should be able to share textures
     std::list<GameObject*> m_gameObjects;
     Player* m_player{};
 
     LevelState m_state;
+
+    size_t m_targetHarvestedCount;
 };
