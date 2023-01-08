@@ -63,4 +63,27 @@ void Player::checkInput()
 void Player::update(float deltaTime)
 {
     DynamicGameObject::update(deltaTime);
+
+    // wrap around
+
+    float halfWidth = (float)m_texture.width * 0.5f;
+    float halfHeight = (float)m_texture.height * 0.5f;
+
+    if (m_position.x < -halfWidth)
+    {
+        m_position.x = (float)GetScreenWidth() + halfWidth;
+    }
+    else if (m_position.x > (float)GetScreenWidth() + halfWidth)
+    {
+        m_position.x = -halfWidth;
+    }
+    
+    if (m_position.y < -halfHeight)
+    {
+        m_position.y = (float)GetScreenHeight() + halfHeight;
+    }
+    else if (m_position.y > (float)GetScreenHeight() + halfHeight)
+    {
+        m_position.y = -halfHeight;
+    }
 }
