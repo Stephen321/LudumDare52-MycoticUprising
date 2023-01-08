@@ -39,6 +39,7 @@ void LevelScene::init()
     m_player->init();
 
     m_level = 0;
+    resetPlayer();
     resetLevel(m_level);
 
     // setup any singleton game objects
@@ -123,10 +124,10 @@ void LevelScene::draw() const
 
 
     // TODO: HUD class
-    DrawText(TextFormat("Health: %d", m_player->getHealth()), getScreenX(0.1f), getScreenY(0.06f), 16.f, WHITE);
-    DrawText(TextFormat("Harvested: %d", m_player->getHarvestedCount()), getScreenX(0.75f), getScreenY(0.06f), 16.f,
+    DrawText(TextFormat("Health: %d", m_player->getHealth()), Utilities::getScreenX(0.1f), Utilities::getScreenY(0.06f), 16.f, WHITE);
+    DrawText(TextFormat("Harvested: %d", m_player->getHarvestedCount()), Utilities::getScreenX(0.75f), Utilities::getScreenY(0.06f), 16.f,
              WHITE);
-    DrawText(TextFormat("Level: %d", m_level + 1), getScreenX(0.43f), getScreenY(0.03f), 18.f,
+    DrawText(TextFormat("Level: %d", m_level + 1), Utilities::getScreenX(0.43f), Utilities::getScreenY(0.03f), 18.f,
              WHITE);
 }
 
@@ -168,7 +169,7 @@ void LevelScene::resetPlayer()
     if (!m_player)
         return;
 
-    m_player->setPosition((float)getScreenX(0.5f), (float)getScreenY(0.5f));
+    m_player->setPosition((float)Utilities::getScreenX(0.5f), (float)Utilities::getScreenY(0.5f));
 }
 
 void LevelScene::updateState()
@@ -223,6 +224,5 @@ void LevelScene::resetLevel(size_t newLevel)
     if (newLevel != 0)
         PlaySound(m_levelChangeSound);
     LevelDifficultyManager::get().setLevel(m_level);
-    resetPlayer();
     placeEnemies();
 }

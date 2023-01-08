@@ -24,7 +24,7 @@ void AppleTree::update(float deltaTime)
     // get direction to player
     float xDir = levelState.playerPositionX - m_position.x;
     float yDir = levelState.playerPositionY - m_position.y;
-    float length = getLength(xDir, yDir);
+    float length = Utilities::getLength(xDir, yDir);
     if (length > 0.f)
     {
         xDir /= length;
@@ -79,8 +79,8 @@ void AppleTree::harvested()
     Vector2 direction;
     float rotation = 360.f * (float)rand() / (float)RAND_MAX;
 
-    direction.x = cosf(toRadians(rotation));
-    direction.y = sinf(toRadians(rotation));
+    direction.x = cosf(Utilities::toRadians(rotation));
+    direction.y = sinf(Utilities::toRadians(rotation));
 
 
     Vector2 position = m_position;

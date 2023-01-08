@@ -31,10 +31,12 @@ Settings& Game::getSettings()
 
 void Game::init()
 {
-    m_settings.config = getConfig();
+    m_settings.config = Utilities::getConfig();
 
+    // TODO: didnt seem to work in release standalone
     // init window
-    InitWindow(m_settings.config.screenWidth, m_settings.config.screenHeight, WINDOW_TITLE);
+    //InitWindow(m_settings.config.screenWidth, m_settings.config.screenHeight, WINDOW_TITLE);
+    InitWindow(640, 360, WINDOW_TITLE);
     SetTargetFPS(60);
 
     // init audio

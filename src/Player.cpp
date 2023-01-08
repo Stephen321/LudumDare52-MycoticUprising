@@ -113,13 +113,13 @@ void Player::checkInput()
         // calculate direction to mouse
         float xDir = GetMouseX() - m_position.x;
         float yDir = GetMouseY() - m_position.y;
-        float length = getLength(xDir, yDir);
+        float length = Utilities::getLength(xDir, yDir);
         xDir /= length;
         yDir /= length;
         properties.startX = m_position.x + (xDir * 24.f);
         properties.startY = m_position.y + (yDir * 24.f);
 
-        const float rotation = toDegrees(atan2f(yDir, xDir));
+        const float rotation = Utilities::toDegrees(atan2f(yDir, xDir));
         if (rotation > 180.f && rotation < 270.f)
             properties.textureName += "Flipped";
 
@@ -161,7 +161,7 @@ void Player::update(float deltaTime)
     if (m_dashing)
     {
         Vector2 normalizedVelocity{};
-        normalize(m_velocity.x, m_velocity.y, normalizedVelocity.x, normalizedVelocity.y);
+        Utilities::normalize(m_velocity.x, m_velocity.y, normalizedVelocity.x, normalizedVelocity.y);
         m_velocity.x = normalizedVelocity.x * m_maxVelocity * 2.5f;
         m_velocity.y = normalizedVelocity.y * m_maxVelocity * 2.5f;
         m_position.x += m_velocity.x * deltaTime;
@@ -250,7 +250,7 @@ void Player::harvestEnemies()
         Enemy* enemy = dynamic_cast<Enemy*>(gameObject);
         if (enemy)
         {
-            if (isColliding(m_position.x, m_position.y, getWidth(),
+            if (Utilities::isColliding(m_position.x, m_position.y, getWidth(),
                             enemy->getPosition().x,
                             enemy->getPosition().y,
                             enemy->getWidth()))

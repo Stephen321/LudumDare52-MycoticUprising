@@ -12,32 +12,28 @@
 // ini files
 #define GET_SETTING(SECTION, KEY) GetPrivateProfileIntW(L##SECTION, L##KEY, INVALID, SETTINGS_INI)
 
-extern Config getConfig();
-extern Settings& getSettings();
-
-extern float getScreenX(float percentage);
-extern float getScreenY(float percentage);
-
-inline float toRadians(float degrees)
+class Utilities
 {
-    return degrees * (M_PI / 180.0);
-}
+public:
+    static Config getConfig();
+    static Settings& getSettings();
 
-inline float toDegrees(float radians)
-{
-    return radians * (180.0 / M_PI);
-}
+    static float getScreenX(float percentage);
+    static float getScreenY(float percentage);
 
-inline float getLength(float x, float y)
-{
-    return sqrt(x * x + y * y);
-}
+    static float toRadians(float degrees)
+    {
+        return degrees * (M_PI / 180.0);
+    }
 
-inline void normalize(float x, float y, float& outX, float& outY)
-{
-    float length = getLength(x, y);
-    outX = x / length;
-    outY = y / length;
-}
+    static float toDegrees(float radians)
+    {
+        return radians * (180.0 / M_PI);
+    }
 
-extern bool isColliding(float x1, float y1, float r1, float x2, float y2, float r2);
+    static float getLength(float x, float y);
+
+    static void normalize(float x, float y, float& outX, float& outY);
+
+    static bool isColliding(float x1, float y1, float r1, float x2, float y2, float r2);
+};

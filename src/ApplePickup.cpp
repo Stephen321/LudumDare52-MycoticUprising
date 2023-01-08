@@ -20,7 +20,7 @@ void ApplePickup::update(float deltaTime)
     Player* player = Game::get().getPlayer();
     if (player)
     {
-        if (isColliding(m_position.x, m_position.y - (getHeight() * 0.5f), getWidth(), player->getPosition().x,
+        if (Utilities::isColliding(m_position.x, m_position.y - (getHeight() * 0.5f), getWidth(), player->getPosition().x,
                         player->getPosition().y, player->getWidth()))
         {
             player->receivedPickup();

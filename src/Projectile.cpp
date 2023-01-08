@@ -20,7 +20,7 @@ namespace
             PointProjectile* projectile = dynamic_cast<PointProjectile*>(gameObject);
             if (projectile)
             {
-                if (isColliding(x, y, r,
+                if (Utilities::isColliding(x, y, r,
                                 projectile->getPosition().x,
                                 projectile->getPosition().y,
                                 projectile->getWidth()))
@@ -55,7 +55,7 @@ PointProjectile::PointProjectile(const ProjectileProperties& properties)
 {
     float xDir = m_properties.targetX - m_position.x;
     float yDir = m_properties.targetY - m_position.y;
-    float length = getLength(xDir, yDir);
+    float length = Utilities::getLength(xDir, yDir);
     m_velocity.x = m_maxVelocity * (xDir / length);
     m_velocity.y = m_maxVelocity * (yDir / length);
 }
@@ -71,7 +71,7 @@ void PointProjectile::update(float deltaTime)
     Player* player = Game::get().getPlayer();
     if (player)
     {
-        if (isColliding(m_position.x, m_position.y - (getHeight() * 0.5f), getWidth(), player->getPosition().x, player->getPosition().y, player->getWidth()))
+        if (Utilities::isColliding(m_position.x, m_position.y - (getHeight() * 0.5f), getWidth(), player->getPosition().x, player->getPosition().y, player->getWidth()))
         {
             player->damage(2.f);
             markAsDead();
@@ -97,8 +97,8 @@ FireWaveProjectile::FireWaveProjectile(const ProjectileProperties& properties)
     : Projectile(properties)
       , m_timer(0.f)
 {
-    m_velocity.x = cosf(toRadians(m_rotation)) * m_maxVelocity;
-    m_velocity.y = sinf(toRadians(m_rotation)) * m_maxVelocity;
+    m_velocity.x = cosf(Utilities::toRadians(m_rotation)) * m_maxVelocity;
+    m_velocity.y = sinf(Utilities::toRadians(m_rotation)) * m_maxVelocity;
 }
 
 void FireWaveProjectile::update(float deltaTime)
