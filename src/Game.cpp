@@ -37,6 +37,7 @@ void Game::init()
     // init window
     //InitWindow(m_settings.config.screenWidth, m_settings.config.screenHeight, WINDOW_TITLE);
     InitWindow(640, 360, WINDOW_TITLE);
+    SetWindowSize(640, 360);
     SetTargetFPS(60);
 
     // init audio
