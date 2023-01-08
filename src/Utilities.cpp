@@ -17,12 +17,12 @@ Settings& getSettings()
     return Game::get().getSettings();
 }
 
-extern size_t getScreenX(float percentage)
+extern float getScreenX(float percentage)
 {
-    return (size_t)(getSettings().config.screenWidth * percentage);
+    return getSettings().config.screenWidth * percentage;
 }
 
-extern size_t getScreenY(float percentage)
+extern float getScreenY(float percentage)
 {
-    return (size_t)(getSettings().config.screenHeight * percentage);
+    return getSettings().config.screenHeight * percentage;
 }

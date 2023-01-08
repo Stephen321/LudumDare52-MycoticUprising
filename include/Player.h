@@ -1,11 +1,11 @@
 #pragma once
-#include "Character.h"
+#include "DynamicGameObject.h"
 
-class Player : public Character
+class Player : public DynamicGameObject
 {
 public:
     Player();
-    void init(const std::string& textureName = "", size_t drawLayer = 0) override;
+    void init(const std::string& textureName = "invalid", size_t drawLayer = 1) override;
     void checkInput();
     void update(float deltaTime) override;
 };

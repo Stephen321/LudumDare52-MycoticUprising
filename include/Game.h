@@ -1,7 +1,11 @@
 #pragma once
+#include <list>
+
+#include "LevelState.h"
 #include "Settings.h"
 
 
+class GameObject;
 class Scene;
 
 class Game
@@ -15,6 +19,8 @@ public:
     static Game& get();
     Settings& getSettings();
     void switchScene(size_t sceneIndex);
+    LevelState getLevelState();
+    std::list<GameObject*>& getGameObjectsRef();
 
 private:
     Game();

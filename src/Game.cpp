@@ -1,11 +1,12 @@
 #include "Game.h"
 
 #include "Constants.h"
-#include "GameScene.h"
+#include "LevelScene.h"
 #include "MenuScene.h"
 #include "raylib.h"
 #include "Scene.h"
 #include "Utilities.h"
+#include "GameObject.h"
 
 Game::Game()
     : m_currentSceneIndex(0)
@@ -40,8 +41,8 @@ void Game::init()
 
     // init m_scenes
     m_scenes[SCENE_INDEX_MENU] = new MenuScene;
-    m_scenes[SCENE_INDEX_GAME] = new GameScene;
-    switchScene(SCENE_INDEX_GAME);
+    m_scenes[SCENE_INDEX_LEVEL] = new LevelScene;
+    switchScene(SCENE_INDEX_LEVEL);
 }
 
 void Game::run()
@@ -84,4 +85,27 @@ void Game::switchScene(size_t sceneIndex)
     m_scenes[m_currentSceneIndex]->close();
     m_currentSceneIndex = sceneIndex;
     m_scenes[m_currentSceneIndex]->init();
+}
+
+LevelState Game::getLevelState()
+{
+    LevelState state;
+
+    LevelScene* level = dynamic_cast<LevelScene*>(m_scenes[m_currentSceneIndex]);
+    if (level)
+        state = level->getState();
+
+    return state;
+}
+
+std::list<GameObject*>& Game::getGameObjectsRef()
+{
+    std::list<GameObject*> gameObjects;
+
+    LevelScene* level = dynamic_cast<LevelScene*>(m_scenes[m_currentSceneIndex]);
+    if (!level)
+    {
+        return gameObjects;
+    }
+   return level->getGameObjectsRef();
 }

@@ -11,7 +11,7 @@ void MenuScene::checkInput()
 {
     if (IsKeyPressed(KEY_SPACE))
     {
-        Game::get().switchScene(SCENE_INDEX_GAME);
+        Game::get().switchScene(SCENE_INDEX_LEVEL);
     }
 }
 
